@@ -20,7 +20,7 @@ const routes = [
   },
   {
     path: '/addresses/:address_id?/edit',
-    name: 'addreses_edit',
+    name: 'address_edit',
     component: AddressesForm
   },
   {
