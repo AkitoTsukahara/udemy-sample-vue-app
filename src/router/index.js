@@ -2,6 +2,7 @@ import Vue from 'vue'
 import VueRouter from 'vue-router'
 import Home from '../views/Home.vue'
 import Addresses from '../components/Addresses.vue'
+import AddressesForm from '../views/AddressesForm.vue'
 
 Vue.use(VueRouter)
 
@@ -16,6 +17,11 @@ const routes = [
     path: '/addresses',
     name: 'addreses',
     component: Addresses
+  },
+  {
+    path: '/addresses/:address_id?/edit',
+    name: 'addreses_edit',
+    component: AddressesForm
   },
   {
     // Aboutページ
