@@ -10,12 +10,12 @@ const routes = [
   {
     // Homeページ
     path: '/',
-    name: 'Home',
+    name: 'home',
     component: Home
   },
   {
     path: '/addresses',
-    name: 'addreses',
+    name: 'addresses',
     component: Addresses
   },
   {
