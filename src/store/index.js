@@ -28,6 +28,11 @@ export default new Vuex.Store({
     setLoginUser ({ commit }, user) {
       commit('setLoginUser', user)
     },
+    fetchAddresses ({ getters, commit }) {
+      firebase.firestore().collection(`users/${getters.uid}/addresses`).get().then(snapshot => {
+        snapshot.forEach(doc => commit('addAddress', { id: doc.id, address:  doc.data() }))
+      })
+    },
     deleteLoginUser ({ commit }) {
       commit('deleteLoginUser')
     },
@@ -41,13 +46,18 @@ export default new Vuex.Store({
     toggleSideMenu ({ commit }) {
       commit('toggleSideMenu')
     },
-    addAddress ({ commit }, address) {
-      commit('addAddress', address)
+    addAddress ({ getters, commit }, address) {
+      if (getters.uid) {
+        firebase.firestore().collection(`users/${getters.uid}/addresses`).add(address).then(doc => {
+          commit('addAddress', { id: doc.id, address })
+        })
+      }
     }
   },
   getters: {
     userName: state => state.login_user ? state.login_user.displayName : '',
     photoURL: state => state.login_user ? state.login_user.photoURL : '',
+    uid: state => state.login_user ? state.login_user.uid : ''
   },
   modules: {
   }
